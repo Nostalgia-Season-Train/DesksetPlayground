@@ -69,8 +69,8 @@ function toggleDark() {
 <template>
   <nav>
     <h1>
-      <img alt="logo" src="/logo.svg" />
-      <span>Vue SFC Playground</span>
+      <img alt="logo" src="/Deskset.png" />
+      <span>Deskset Playground</span>
     </h1>
     <div class="links">
       <VersionSelect
@@ -141,7 +141,7 @@ function toggleDark() {
         <Download />
       </button>
       <a
-        href="https://github.com/vuejs/core/tree/main/packages-private/sfc-playground"
+        href="https://github.com/Nostalgia-Season-Train/DesksetPlayground"
         target="_blank"
         title="View on GitHub"
         class="github"
