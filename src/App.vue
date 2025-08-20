@@ -141,7 +141,7 @@ const previewOptions = computed(() => ({
     importCode: `
       import { initCustomFormatter${isVaporSupported.value ? ', vaporInteropPlugin' : ''} } from 'vue'
       import axios from 'axios'
-      axios.defaults.baseURL = 'http://127.0.0.1:6527'
+      axios.defaults.baseURL = '${location.origin}'
     `,
     useCode: `
       ${isVaporSupported.value ? 'app.use(vaporInteropPlugin)' : ''}
