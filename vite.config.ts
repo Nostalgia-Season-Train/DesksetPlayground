@@ -9,6 +9,7 @@ const commit = spawnSync('git', ['rev-parse', '--short=7', 'HEAD'])
   .trim()
 
 export default defineConfig({
+  base: '/static/playground/',  // 部署在 DesksetBack static/playground 目录下
   plugins: [
     vue({
       script: {
@@ -34,7 +35,7 @@ function copyVuePlugin(): Plugin {
     name: 'copy-vue',
     generateBundle() {
       const copyFile = (file: string) => {
-        const filePath = path.resolve(__dirname, '../../packages', file)
+        const filePath = path.resolve(__dirname, 'node_modules', file)
         const basename = path.basename(file)
         if (!fs.existsSync(filePath)) {
           throw new Error(
@@ -53,7 +54,8 @@ function copyVuePlugin(): Plugin {
       copyFile(`vue/dist/vue.esm-browser.prod.js`)
       copyFile(`vue/dist/vue.runtime.esm-browser.js`)
       copyFile(`vue/dist/vue.runtime.esm-browser.prod.js`)
-      copyFile(`server-renderer/dist/server-renderer.esm-browser.js`)
+      copyFile(`@vue/server-renderer/dist/server-renderer.esm-browser.js`)
+      copyFile(`axios/dist/esm/axios.min.js`)  // 复制 dist/esm 而不是 dist 中的 axios.min.js
     },
   }
 }

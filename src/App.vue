@@ -22,13 +22,13 @@ const autoSave = ref(initAutoSave)
 
 const { productionMode, vueVersion, importMap } = useVueImportMap({
   runtimeDev: import.meta.env.PROD
-    ? `${location.origin}/vue.runtime.esm-browser.js`
+    ? `${location.origin}/static/playground/vue.runtime.esm-browser.js`
     : `${location.origin}/src/vue-dev-proxy`,
   runtimeProd: import.meta.env.PROD
-    ? `${location.origin}/vue.runtime.esm-browser.prod.js`
+    ? `${location.origin}/static/playground/vue.runtime.esm-browser.prod.js`
     : `${location.origin}/src/vue-dev-proxy-prod`,
   serverRenderer: import.meta.env.PROD
-    ? `${location.origin}/server-renderer.esm-browser.js`
+    ? `${location.origin}/static/playground/server-renderer.esm-browser.js`
     : `${location.origin}/src/vue-server-renderer-dev-proxy`,
 })
 
@@ -69,7 +69,9 @@ const sfcOptions = computed(
 
 // 直接插入 axios 导入
 // @ts-ignore
-importMap.value.imports.axios = `${location.origin}/src/axios`
+importMap.value.imports.axios = import.meta.env.PROD
+  ? `${location.origin}/static/playground/axios.min.js`
+  : `${location.origin}/src/axios`
 
 const store = useStore(
   {
@@ -135,7 +137,12 @@ watch(
 
 const previewOptions = computed(() => ({
   customCode: {
-    importCode: `import { initCustomFormatter${isVaporSupported.value ? ', vaporInteropPlugin' : ''} } from 'vue'`,
+    // 初始化 axios baseURL = 'http://127.0.0.1:6527'
+    importCode: `
+      import { initCustomFormatter${isVaporSupported.value ? ', vaporInteropPlugin' : ''} } from 'vue'
+      import axios from 'axios'
+      axios.defaults.baseURL = 'http://127.0.0.1:6527'
+    `,
     useCode: `
       ${isVaporSupported.value ? 'app.use(vaporInteropPlugin)' : ''}
       if (window.devtoolsFormatters) {
