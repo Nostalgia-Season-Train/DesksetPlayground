@@ -67,6 +67,10 @@ const sfcOptions = computed(
   }),
 )
 
+// 直接插入 axios 导入
+// @ts-ignore
+importMap.value.imports.axios = `${location.origin}/src/axios`
+
 const store = useStore(
   {
     builtinImportMap: importMap,
