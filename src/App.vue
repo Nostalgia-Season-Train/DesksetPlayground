@@ -73,6 +73,9 @@ importMap.value.imports.axios = import.meta.env.PROD
   ? `${location.origin}/static/playground/axios.min.js`
   : `${location.origin}/src/axios`
 
+// @ts-ignore
+if (import.meta.env.PROD) importMap.value.imports['element-plus'] = `${location.origin}/static/playground/element-plus.js`
+
 const store = useStore(
   {
     builtinImportMap: importMap,
@@ -136,6 +139,10 @@ watch(
 )
 
 const previewOptions = computed(() => ({
+  // 引入 Element Plus CSS 样式
+  headHTML: `
+    <link rel="stylesheet" href="${location.origin}/static/playground/element-plus.css"\/>
+  `,
   customCode: {
     // 初始化 axios baseURL = 'http://127.0.0.1:6527'
     importCode: `

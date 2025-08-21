@@ -34,9 +34,9 @@ function copyVuePlugin(): Plugin {
   return {
     name: 'copy-vue',
     generateBundle() {
-      const copyFile = (file: string) => {
+      const copyFile = (file: string, name: string | null = null) => {
         const filePath = path.resolve(__dirname, 'node_modules', file)
-        const basename = path.basename(file)
+        const basename = name != null ? name : path.basename(file)
         if (!fs.existsSync(filePath)) {
           throw new Error(
             `${basename} not built. ` +
@@ -56,6 +56,8 @@ function copyVuePlugin(): Plugin {
       copyFile(`vue/dist/vue.runtime.esm-browser.prod.js`)
       copyFile(`@vue/server-renderer/dist/server-renderer.esm-browser.js`)
       copyFile(`axios/dist/esm/axios.min.js`)  // 复制 dist/esm 而不是 dist 中的 axios.min.js
+      copyFile(`element-plus/dist/index.full.min.mjs`, 'element-plus.js')  // 复制 mjs = ESM 模块
+      copyFile(`element-plus/dist/index.css`, 'element-plus.css')
     },
   }
 }
