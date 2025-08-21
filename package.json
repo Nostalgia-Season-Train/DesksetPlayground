@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "调整_tsconfig_默认值": "node adjust_tsconfig_default"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
