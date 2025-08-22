@@ -58,6 +58,7 @@ function copyVuePlugin(): Plugin {
       copyFile(`axios/dist/esm/axios.min.js`)  // 复制 dist/esm 而不是 dist 中的 axios.min.js
       copyFile(`element-plus/dist/index.full.min.mjs`, 'element-plus.js')  // 复制 mjs = ESM 模块
       copyFile(`element-plus/dist/index.css`, 'element-plus.css')
+      copyFile(`vue-hooks-plus/dist/js/index.es.js`, 'vue-hooks-plus.js')
     },
   }
 }

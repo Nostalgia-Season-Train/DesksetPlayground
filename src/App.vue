@@ -76,6 +76,9 @@ importMap.value.imports.axios = import.meta.env.PROD
 // @ts-ignore
 if (import.meta.env.PROD) importMap.value.imports['element-plus'] = `${location.origin}/static/playground/element-plus.js`
 
+// @ts-ignore
+if (import.meta.env.PROD) importMap.value.imports['vue-hooks-plus'] = `${location.origin}/static/playground/vue-hooks-plus.js`
+
 const store = useStore(
   {
     builtinImportMap: importMap,
