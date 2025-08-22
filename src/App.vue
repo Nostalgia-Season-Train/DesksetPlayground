@@ -140,8 +140,23 @@ watch(
 
 const previewOptions = computed(() => ({
   // 引入 Element Plus CSS 样式
+  // 预览 iframe 居中 App.vue 组件
   headHTML: `
     <link rel="stylesheet" href="${location.origin}/static/playground/element-plus.css"\/>
+    <style>
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   `,
   customCode: {
     // 初始化 axios baseURL = 'http://127.0.0.1:6527'
